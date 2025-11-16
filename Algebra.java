@@ -96,7 +96,7 @@ public class Algebra {
 			x1 = minus(x1, x2);
 			result++;
 		}
-		if (flipCounter % 2 == 1) {
+		if (flipCounter == 1) {
 			result = times(result, -1);
 		}
 		return result;
