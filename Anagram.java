@@ -32,9 +32,9 @@ public class Anagram {
 	public static boolean isAnagram(String str1, String str2) {
 		str1 = preProcess(str1);
 		str2 = preProcess(str2);
-		if (str1.length() != str2.length()) {
+		/*if (str1.length() != str2.length()) {
 			return false;
-		}
+		}*/
 		for (int i = 0; i < str1.length(); i++) {
 			if (str2.indexOf(str1.charAt(i)) == -1)
 				return false;
@@ -51,7 +51,7 @@ public class Anagram {
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
 		str = str.toLowerCase();
-		str = str.replaceAll("[^a-z]", "");
+		str = str.replaceAll("[^a-z ]", "");
 		return str;
 	} 
 	   
@@ -59,11 +59,11 @@ public class Anagram {
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		String anagram = "";
-		String str1 = str;
+		String remaining = str;
 		for (int i = 0; i < str.length(); i++) {
-			int rndIndex = (int) (Math.random() * str1.length());
-			anagram += str1.charAt(rndIndex);
-			str1 = str1.substring(0, rndIndex) + str1.substring(rndIndex + 1);
+			int rndIndex = (int) (Math.random() * remaining.length());
+			anagram += remaining.charAt(rndIndex);
+			remaining = remaining.substring(0, rndIndex) + remaining.substring(rndIndex + 1);
 		}
 		return anagram;
 	}
