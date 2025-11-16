@@ -7,6 +7,8 @@ public class Anagram {
 		System.out.println(isAnagram("Madam Curie","Radium came")); // true
 		System.out.println(isAnagram("Tom Marvolo Riddle","I am Lord Voldemort")); // true
 
+		System.out.println(randomAnagram("1234567890"));
+
 		// Tests the preProcess function.
 		System.out.println(preProcess("What? No way!!!"));
 		
@@ -30,6 +32,9 @@ public class Anagram {
 	public static boolean isAnagram(String str1, String str2) {
 		str1 = preProcess(str1);
 		str2 = preProcess(str2);
+		if (str1.length() != str2.length()) {
+			return false;
+		}
 		for (int i = 0; i < str1.length(); i++) {
 			if (str2.indexOf(str1.charAt(i)) == -1)
 				return false;
@@ -46,7 +51,7 @@ public class Anagram {
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
 		str = str.toLowerCase();
-		str = str.replaceAll("[^a-z ]", "");
+		str = str.replaceAll("[^a-z]", "");
 		return str;
 	} 
 	   
@@ -54,12 +59,12 @@ public class Anagram {
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		String anagram = "";
+		String str1 = str;
 		for (int i = 0; i < str.length(); i++) {
-			int rndIndex = (int) (Math.random() * str.length());
-			anagram += str.charAt(rndIndex);
+			int rndIndex = (int) (Math.random() * str1.length());
+			anagram += str1.charAt(rndIndex);
+			str1 = str1.substring(0, rndIndex) + str1.substring(rndIndex + 1);
 		}
-		if (isAnagram(str, anagram))
-			return anagram;
-		else return randomAnagram(str);
+		return anagram;
 	}
 }
